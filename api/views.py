@@ -8,12 +8,11 @@ from api.serializers import SignupSerializers, verifyOTPSerializer, ResendOTPSer
 from api.utils import generate_otp, send_otp_email
 from django.core.cache import cache
 import logging
-
+from common.response_handler import *
 logger = logging.getLogger(__name__)
 # Create your views here.
 class SignupViewSet(APIView):
     def post(self, request):
-        
         serializer_class = SignupSerializers(data = request.data)
         if serializer_class.is_valid():
             user = serializer_class.save()
@@ -25,6 +24,7 @@ class SignupViewSet(APIView):
         else:
             logger.error(f"Serializer errors: {serializer_class.errors}")
             return Response(serializer_class.errors, status=400) 
+        
     
 class VerifyOTPViewSet(APIView):
     def post(self, request):
