@@ -16,7 +16,7 @@ SECRET_KEY = env('DJANGO_SECRET_KEY')
 DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'quiz-application-nq76.onrender.com','quiz-otp-auth.onrender.com','*']
-CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1', 'http://localhost:5173', 'https://quiz-application-nq76.onrender.com','https://quiz-otp-auth.onrender.com','*']
+CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:5173', 'http://localhost:5173', 'https://quiz-application-nq76.onrender.com','https://quiz-otp-auth.onrender.com']
 
 
 
