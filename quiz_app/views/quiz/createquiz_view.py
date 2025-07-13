@@ -1,5 +1,6 @@
 from rest_framework.views import APIView
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticatedOrReadOnly,IsAuthenticated
+
 from common.serializers.createquiz_serializer import QuizSerializer
 from common.response_handler import ResponseHandler  
 
@@ -12,7 +13,7 @@ class CreateQuizViewSet(APIView):
     """
     
     # Allow only authenticated users to POST; others can only read (if applicable)
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticated]
 
     def post(self, request):
         """

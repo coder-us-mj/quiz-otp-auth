@@ -4,8 +4,6 @@ import environ
 from pathlib import Path
 from datetime import timedelta
 
-
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = environ.Env()
@@ -61,6 +59,56 @@ CORS_ALLOW_HEADERS = [
 ]
 
 
+# CSRF_TRUSTED_ORIGINS are for secure (HTTPS) cross-site requests with CSRF.
+# Ensure all your frontend origins are listed if you're using CSRF protection.
+CSRF_TRUSTED_ORIGINS = [
+    'http://127.0.0.1:5173',
+    'http://localhost:5173',
+    "http://localhost:3000",
+    "http://localhost:3005",
+    'https://quiz-application-nq76.onrender.com',
+    'https://quiz-otp-auth.onrender.com'
+]
+
+# --- CORS SETTINGS (django-cors-headers) ---
+# CORS_ALLOW_ALL_ORIGINS = True means all origins are allowed.
+# If this is True, CORS_ALLOWED_ORIGINS will be ignored.
+# This is good for development but generally unsafe for production.
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True # Important if your frontend sends cookies/auth headers
+
+# CORS_ALLOWED_ORIGINS is only used if CORS_ALLOW_ALL_ORIGINS is False.
+# I'm keeping it here for reference, but it won't be active with CORS_ALLOW_ALL_ORIGINS = True.
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://localhost:3005",
+    "http://127.0.0.1:3005",
+    "http://localhost:5173", # Added your 5173 port explicitly for clarity
+    "http://127.0.0.1:5173", # Added your 5173 port explicitly for clarity
+]
+
+CORS_EXPOSE_HEADERS = ["Content-Type", "X-CSRFToken"]
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+]
+
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -146,7 +194,7 @@ AUTH_USER_MODEL = 'common.SignUp'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587    
+EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = env('EMAIL_USER')
 EMAIL_HOST_PASSWORD = env('EMAIL_PASS')
