@@ -11,15 +11,53 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 SECRET_KEY = env('DJANGO_SECRET_KEY')
 
-# --- IMPORTANT: Set DEBUG to True for local development ---
-# When DEBUG is False, Django applies stricter security, and you need
-# to ensure everything is correctly configured for production.
-# For local testing, True is usually preferred.
 DEBUG = True
 
-# ALLOWED_HOSTS should include your local development hosts
-# '*' is generally okay for DEBUG=True, but be specific for production.
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'quiz-application-nq76.onrender.com','quiz-otp-auth.onrender.com','*']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'quiz-application-nq76.onrender.com','quiz-otp-auth.onrender.com', '*']
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://127.0.0.1:5173',
+    'http://localhost:5173',
+    "http://localhost:3000",
+    "http://localhost:3005",
+    'https://quiz-application-nq76.onrender.com',
+    'https://quiz-otp-auth.onrender.com'
+]
+
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://localhost:3005",
+    "http://127.0.0.1:3005",
+    "http://localhost:5173", 
+    "http://127.0.0.1:5173", 
+]
+
+CORS_EXPOSE_HEADERS = ["Content-Type", "X-CSRFToken"]
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+]
+
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+]
+
 
 # CSRF_TRUSTED_ORIGINS are for secure (HTTPS) cross-site requests with CSRF.
 # Ensure all your frontend origins are listed if you're using CSRF protection.
@@ -79,10 +117,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'corsheaders',  # <--- YOU MUST ADD THIS LINE
+    'corsheaders',
     'rest_framework',
-    'api',
-    'rest_framework_simplejwt'
+    'quiz_app',
+    'common',
+    'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
 ]
 
 REST_FRAMEWORK = {
@@ -97,7 +137,7 @@ SIMPLE_JWT = {
 }
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',  # <--- YOU MUST ADD THIS LINE AT THE VERY TOP
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -107,7 +147,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'quiz_application.urls'
+ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
     {
@@ -124,7 +164,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'quiz_application.wsgi.application'
+WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
@@ -149,7 +189,8 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'api.SignUp'
+AUTH_USER_MODEL = 'common.SignUp'
+
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
