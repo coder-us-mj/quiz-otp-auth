@@ -10,7 +10,7 @@ class EmailOTP(models.Model):
     """
     email=models.EmailField()
     otp = models.CharField(max_length=6)
-    created_at= models.DateTimeField(auto_now_add=True)
+    created_at= models.DateTimeField(auto_now=True)
 
     def is_expired(self):
         """
@@ -28,3 +28,7 @@ class EmailOTP(models.Model):
         Returns the email and associated OTP.
         """
         return f"{self.email} - {self.otp}"
+    
+    class Meta:
+        # Explicitly specify the app
+        app_label = 'common'

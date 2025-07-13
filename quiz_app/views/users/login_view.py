@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
-from quiz_app.common.response_handler import ResponseHandler
+from common.response_handler import ResponseHandler
 
 
 
@@ -36,10 +36,10 @@ class LoginViewSet(APIView):
                         'access': str(refresh.access_token),
                     })
                 else:
-                    return ResponseHandler.handle_403_error()
+                    return ResponseHandler.handle_400_error("Account is not activated. Verify your email OTP.")
                 
             # Authentication failed (invalid credentials)
-            return ResponseHandler.handle_401_error()
+            return ResponseHandler.handle_400_error("Invalid email or password")
 
         except Exception as e:
             # Catch and handle unexpected server errors

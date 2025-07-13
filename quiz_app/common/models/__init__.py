@@ -1,1 +1,0 @@
-from quiz_app.common.models.user.user_signup import SignUp

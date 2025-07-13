@@ -1,8 +1,9 @@
 from rest_framework.views import APIView
-from quiz_app.serializers.verifyotp_serializer import verifyOTPSerializer
-from quiz_app.common.models.user.user_otphandler import EmailOTP
-from quiz_app.common.models.user.user_signup import SignUp
-from quiz_app.common.response_handler import ResponseHandler
+from common.serializers.verifyotp_serializer import verifyOTPSerializer
+from common.models.user.user_otphandler import EmailOTP
+from common.models.user.user_signup import SignUp
+from common.response_handler import ResponseHandler
+from django.core.cache import cache
 
 class VerifyOTPViewSet(APIView):
     """
@@ -27,11 +28,18 @@ class VerifyOTPViewSet(APIView):
                 email = serializer.validated_data['email'].strip()
                 otp_input = serializer.validated_data['otp'].strip()
 
+                #  STEP 1: Check OTP in cache first
+                cached_otp = cache.get(email)
+                if not cached_otp:
+                    return ResponseHandler.handle_400_error("OTP expired")
+
+                if cached_otp != otp_input:
+                    return ResponseHandler.handle_400_error("Invalid OTP")
                 # Retrieve the most recent OTP entry for this email
                 try:
                     otp_record = EmailOTP.objects.filter(email=email).latest('created_at')
                 except EmailOTP.DoesNotExist:
-                    return ResponseHandler.handle_404_error()
+                    return ResponseHandler.handle_400_error("'OTP not found. Please request again.'")
 
                 # Check if the OTP has expired
                 if otp_record.is_expired():
@@ -53,11 +61,11 @@ class VerifyOTPViewSet(APIView):
                         "message": "OTP verified. Account activated."
                     })
                 except SignUp.DoesNotExist:
-                    return ResponseHandler.handle_404_error()
+                    return ResponseHandler.handle_400_error("User not found.")
             
             # Handle input validation errors
             return ResponseHandler.handle_400_error(serializer.errors)
         
         except Exception as e:
-            # Catch all unexpected exceptions
+            # Catch all unexpected e
             return ResponseHandler.handle_500_error(request, e)

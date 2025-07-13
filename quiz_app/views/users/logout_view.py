@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken, TokenError
-from quiz_app.common.response_handler import ResponseHandler
+from common.response_handler import ResponseHandler
 
 
 class LogoutViewSet(APIView):

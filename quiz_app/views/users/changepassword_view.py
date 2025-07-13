@@ -2,8 +2,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from quiz_app.serializers.changepassword_serializer import ChangePasswordSerializer
-from quiz_app.common.response_handler import ResponseHandler
+from common.serializers.changepassword_serializer import ChangePasswordSerializer
+from common.response_handler import ResponseHandler
 
 class ChangePasswordViewSet(APIView):
     """

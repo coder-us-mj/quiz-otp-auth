@@ -15,7 +15,51 @@ SECRET_KEY = env('DJANGO_SECRET_KEY')
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'quiz-application-nq76.onrender.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'quiz-application-nq76.onrender.com','quiz-otp-auth.onrender.com', '*']
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://127.0.0.1:5173',
+    'http://localhost:5173',
+    "http://localhost:3000",
+    "http://localhost:3005",
+    'https://quiz-application-nq76.onrender.com',
+    'https://quiz-otp-auth.onrender.com'
+]
+
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://localhost:3005",
+    "http://127.0.0.1:3005",
+    "http://localhost:5173", 
+    "http://127.0.0.1:5173", 
+]
+
+CORS_EXPOSE_HEADERS = ["Content-Type", "X-CSRFToken"]
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+]
+
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+]
+
 
 
 INSTALLED_APPS = [
@@ -25,8 +69,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'rest_framework',
     'quiz_app',
+    'common',
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
 ]
@@ -43,6 +89,7 @@ SIMPLE_JWT = {
 }
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -94,7 +141,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'quiz_app.SignUp'
+AUTH_USER_MODEL = 'common.SignUp'
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

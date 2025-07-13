@@ -1,5 +1,5 @@
 from django.contrib import admin
-from quiz_app.common.models.user.user_signup import SignUp
+from common.models.user.user_signup import SignUp
 
 class SignupAdmin(admin.ModelAdmin):
     """

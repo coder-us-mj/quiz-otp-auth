@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from quiz_app.common.models.user.user_signup import SignUp
+from common.models.user.user_signup import SignUp
 from django.contrib.auth.password_validation import validate_password
 
 class SignupSerializer(serializers.ModelSerializer):

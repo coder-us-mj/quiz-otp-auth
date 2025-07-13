@@ -1,6 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from quiz_app.common.models.user.user_manager import CustomUserManager
+from common.models.user.user_manager import CustomUserManager
 
 class SignUp(AbstractUser):
     
@@ -36,5 +36,5 @@ class SignUp(AbstractUser):
     
     class Meta:
         # Explicitly specify the app
-        app_label = 'quiz_app'
+        app_label = 'common'
 

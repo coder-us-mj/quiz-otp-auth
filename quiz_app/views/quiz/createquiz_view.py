@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
-from quiz_app.serializers.createquiz_serializer import QuizSerializer
-from quiz_app.common.response_handler import ResponseHandler  
+from common.serializers.createquiz_serializer import QuizSerializer
+from common.response_handler import ResponseHandler  
 
 
 class CreateQuizViewSet(APIView):
@@ -36,5 +36,5 @@ class CreateQuizViewSet(APIView):
             return ResponseHandler.handle_400_error(serializer.errors)
 
         except Exception as e:
-            # Catch and handle unexpected exceptions
+            # Catch and handle unexpected e
             return ResponseHandler.handle_500_error(request, e)

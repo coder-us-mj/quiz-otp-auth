@@ -14,3 +14,7 @@ class CreateQuiz(models.Model):
         Returns the quiz title for admin and shell display.
         """
         return self.title
+    
+    class Meta:
+        # Explicitly specify the app
+        app_label = 'common'

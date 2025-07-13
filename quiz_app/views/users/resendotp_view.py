@@ -1,9 +1,9 @@
 from rest_framework.views import APIView
-from quiz_app.serializers.resendotp_serializer import ResendOTPSerializer
-from quiz_app.common.models.user.user_otphandler import EmailOTP
-from quiz_app.common.models.user.user_signup import SignUp
-from quiz_app.common.response_handler import ResponseHandler
-from quiz_app.utils.otp_service import otp_service
+from common.serializers.resendotp_serializer import ResendOTPSerializer
+from common.models.user.user_otphandler import EmailOTP
+from common.models.user.user_signup import SignUp
+from common.response_handler import ResponseHandler
+from common.utils.otp_service import otp_service
 from django.core.cache import cache
 
 # Adjust the import as needed
@@ -57,7 +57,7 @@ class ResendOTPView(APIView):
                     })
 
                 except SignUp.DoesNotExist:
-                    return ResponseHandler.handle_404_error()
+                    return ResponseHandler.handle_400_error("User not found.")
             # Input validation failed
             return ResponseHandler.handle_400_error(serializer.errors)
 
