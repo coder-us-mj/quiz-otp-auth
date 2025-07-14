@@ -16,11 +16,6 @@ class ChangePasswordSerializer(serializers.Serializer):
         """
         Validates the current password and checks if new passwords match.
 
-        Raises:
-            ValidationError: If the current password is incorrect or the new passwords don't match.
-
-        Returns:
-            dict: Cleaned and validated data
         """
         user = self.context['request'].user
 

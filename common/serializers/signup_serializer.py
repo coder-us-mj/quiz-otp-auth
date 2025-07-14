@@ -18,14 +18,6 @@ class SignupSerializer(serializers.ModelSerializer):
         """
         Validates that passwords match and meet strength requirements.
 
-        Args:
-            data (dict): Input data from user
-
-        Raises:
-            ValidationError: If passwords do not match or are weak
-
-        Returns:
-            dict: Validated data
         """
         if data['password'] != data['confirm_password']:
             raise serializers.ValidationError("Passwords do not match.")
@@ -36,14 +28,10 @@ class SignupSerializer(serializers.ModelSerializer):
         """
         Creates a new user after validating input data.
 
-        Args:
-            validated_data (dict): Sanitized data from validated() method
-
-        Returns:
-            SignUp instance
         """
         # Remove confirm_password as it's not part of the user model
         validated_data.pop('confirm_password')
+        
         # Create user using custom manager method
         user = SignUp.objects.create_user(
             email=validated_data['email'],
@@ -51,7 +39,8 @@ class SignupSerializer(serializers.ModelSerializer):
             name=validated_data['name'],
             designation=validated_data['designation'],
             district=validated_data['district'],
-            state=validated_data['state']
+            state=validated_data['state'],
+            phone=validated_data['phone']
         )
         # Deactivate account until OTP/email verification
         user.is_active = False  
