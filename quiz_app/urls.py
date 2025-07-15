@@ -7,6 +7,7 @@ from quiz_app.views.users.changepassword_view import ChangePasswordViewSet
 from quiz_app.views.users.logout_view import LogoutViewSet
 from quiz_app.views.quiz.quiz_view import create_quiz, get_quiz, update_quiz, delete_quiz
 from quiz_app.views.quiz.quiz_question_view import add_question, update_question, get_questions, delete_question
+from quiz_app.views.quiz.prequiz_question_view import create_pre_quiz_question, get_pre_quiz_questions, update_pre_quiz_question, delete_pre_quiz_question
 
 # URL patterns for the quiz_app's API endpoints
 urlpatterns = [
@@ -29,6 +30,11 @@ urlpatterns = [
     path('quiz/<uuid:quiz_id>/questions/', get_questions, name='get-questions'),    # GET
     path('quiz-question/update/<int:question_id>/', update_question, name='update-question'),  # PUT
     path('quiz-question/delete/<int:question_id>/', delete_question, name='delete-question'),  # DELETE
+    
+    path('quiz/<uuid:quiz_id>/pre-quiz-questions/add/', create_pre_quiz_question, name='create-pre-quiz-question'), #POST
+    path('quiz/<uuid:quiz_id>/pre-quiz-questions/', get_pre_quiz_questions, name='get-pre-quiz-questions'),         # GET
+    path('quiz/pre-quiz-questions/<int:question_id>/update/', update_pre_quiz_question, name='update-pre-quiz-question'),  # PUT
+    path('quiz/pre-quiz-questions/<int:question_id>/delete/', delete_pre_quiz_question, name='delete-pre-quiz-question'),  # DELETE
 ]
   
   
