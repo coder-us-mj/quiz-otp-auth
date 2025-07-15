@@ -38,3 +38,4 @@ class SignUp(AbstractUser):
         # Explicitly specify the app
         app_label = 'common'
 
+

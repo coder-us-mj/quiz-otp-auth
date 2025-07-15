@@ -14,7 +14,7 @@ class ChangePasswordViewSet(APIView):
     # Ensure the user is logged in
     permission_classes = [IsAuthenticated]
 
-    def post(self, request):
+    def put(self, request):
         """
         POST method to handle password change for authenticated users.
 
