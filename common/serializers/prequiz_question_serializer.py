@@ -8,7 +8,7 @@ class PreQuizQuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = PreQuizQuestion
         fields = [
-            'user', 'quiz', 'quiz_title',
+           'id', 'user', 'quiz', 'quiz_title',
             'question', 'created_at', 'updated_at', 'deleted_at'
         ]
         read_only_fields = ['user', 'quiz','created_at', 'updated_at', 'deleted_at', 'quiz_title']
