@@ -10,6 +10,7 @@ from quiz_app.views.quiz.quiz_view import create_quiz, get_quiz, update_quiz, de
 from quiz_app.views.quiz.quiz_question_view import add_question, update_question, get_questions, delete_question
 from quiz_app.views.quiz.prequiz_question_view import create_pre_quiz_question, get_pre_quiz_questions, update_pre_quiz_question, delete_pre_quiz_question
 from quiz_app.views.quiz.prequiz_answer_view import submit_prequiz_answer
+from quiz_app.views.quiz.cretificate_view import upload_certificate_template, generate_certificate, view_certificate
 # URL patterns for the quiz_app's API endpoints
 urlpatterns = [
     
@@ -41,6 +42,13 @@ urlpatterns = [
     path('quiz/pre-quiz-questions/<int:question_id>/update/', update_pre_quiz_question, name='update-pre-quiz-question'),  # PUT
     path('quiz/pre-quiz-questions/<int:question_id>/delete/', delete_pre_quiz_question, name='delete-pre-quiz-question'),  # DELETE
     path('prequiz/answer/', submit_prequiz_answer, name='submit-prequiz-answer'),
+
+    # Certificate Management
+    
+    path('certificate/template/upload/', upload_certificate_template, name='upload template'),
+    path('certificate/generate/', generate_certificate, name='generate certificate'),
+    path('certificate/view/<uuid:certificate_id>/', view_certificate, name='view_certificate'),
+    
 ]
   
   

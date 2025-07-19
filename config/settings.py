@@ -34,7 +34,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3005",
     "http://127.0.0.1:3005",
     "http://localhost:5173", 
-    "http://127.0.0.1:5173", 
+    "http://127.0.0.1:5173",
 ]
 
 CORS_EXPOSE_HEADERS = ["Content-Type", "X-CSRFToken"]
@@ -188,6 +188,9 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = 'static/'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
