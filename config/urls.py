@@ -24,5 +24,5 @@ def health_check(request):
 urlpatterns = [
     path('', health_check),
     path('admin/', admin.site.urls),
-    path('quiz_app/',include('quiz_app.urls'))
+    path('quiz-app/',include('quiz_app.urls'))
 ]

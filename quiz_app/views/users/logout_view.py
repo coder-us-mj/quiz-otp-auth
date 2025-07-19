@@ -17,10 +17,6 @@ class LogoutViewSet(APIView):
         """
         POST method to blacklist the user's refresh token and invalidate their session.
 
-        Steps:
-        - Require a valid refresh token in the request body.
-        - Blacklist the token using SimpleJWT's token blacklist feature.
-        - Handle errors for invalid or missing tokens.
         """
         try:
             # Extract refresh token from request data
