@@ -28,7 +28,7 @@ def upload_certificate_template(request):
 def generate_certificate(request):
     try:
         # Validate input
-        required_fields = ['template_id', 'quiz_id', 'pre_quiz_question_id', 'pre_quiz_answer_id', 'text', 'x', 'y']
+        required_fields = ['template_id', 'quiz_id', 'pre_quiz_question_id', 'pre_quiz_answer_id', 'x', 'y']
         for field in required_fields:
             if field not in request.data:
                 return ResponseHandler.handle_400_error(f"{field} is required.")
@@ -43,10 +43,10 @@ def generate_certificate(request):
         image = Image.open(template.template_image)
         draw = ImageDraw.Draw(image)
 
-        font = ImageFont.load_default()  # Use ImageFont.truetype() for custom fonts
+        font = ImageFont.truetype("arial.ttf", 50) 
         x = int(request.data['x'])
         y = int(request.data['y'])
-        text = request.data['text']
+        text = pre_a.answer
 
         draw.text((x, y), text, font=font, fill='black')
 
