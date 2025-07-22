@@ -10,7 +10,7 @@ class QuizSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = Quiz
-        fields = ['quiz_id', 'title', 'status']
+        fields = ['quiz_id', 'title', 'description', 'status']
 
     def get_status(self, obj):
         """

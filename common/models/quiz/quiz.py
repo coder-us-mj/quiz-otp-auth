@@ -14,6 +14,7 @@ class Quiz(models.Model):
         on_delete=models.CASCADE
         )
     title = models.CharField(max_length=255)
+    description = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField(null=True, blank=True)
