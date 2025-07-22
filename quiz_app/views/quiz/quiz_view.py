@@ -42,6 +42,17 @@ def get_quiz(request):
     except Exception as e:
         return ResponseHandler.handle_500_error(request, e)
 
+# Get specific quiz for the authenticated user
+
+@api_view(['GET'])
+def get_quiz_info(request, quiz_id):
+    try:
+        quiz = Quiz.objects.get(quiz_id=quiz_id, user=request.user, deleted_at__isnull=True)
+        serializer = QuizSerializer(quiz)
+        return ResponseHandler.handle_200_success(serializer.data)
+    except Quiz.DoesNotExist:
+        return ResponseHandler.handle_400_error('Quiz not found')
+
 
 # Update an existing quiz
 @api_view(['PUT'])

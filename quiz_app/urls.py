@@ -6,7 +6,7 @@ from quiz_app.views.users.login_view import LoginViewSet
 from quiz_app.views.users.changepassword_view import ChangePasswordViewSet
 from quiz_app.views.users.logout_view import LogoutViewSet
 from quiz_app.views.users.forgot_password_view import forgot_password, reset_password   
-from quiz_app.views.quiz.quiz_view import create_quiz, get_quiz, update_quiz, delete_quiz
+from quiz_app.views.quiz.quiz_view import create_quiz, get_quiz, get_quiz_info, update_quiz, delete_quiz
 from quiz_app.views.quiz.quiz_question_view import add_question, update_question, get_questions, delete_question
 from quiz_app.views.quiz.prequiz_question_view import create_pre_quiz_question, get_pre_quiz_questions, update_pre_quiz_question, delete_pre_quiz_question
 from quiz_app.views.quiz.prequiz_answer_view import submit_prequiz_answer
@@ -27,6 +27,7 @@ urlpatterns = [
     # Quiz Management
     path('quiz/create/', create_quiz, name='quiz-create'),
     path('quiz/', get_quiz , name='quiz-list'),
+    path('quiz/<uuid:quiz_id>/', get_quiz_info, name='get_quiz_info'),
     path('quiz/update/<uuid:quiz_id>/', update_quiz, name='quiz-update'),
     path('quiz/delete/<uuid:quiz_id>/', delete_quiz, name='quiz-delete'), 
     
