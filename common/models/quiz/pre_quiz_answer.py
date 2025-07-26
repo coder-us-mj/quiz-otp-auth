@@ -9,7 +9,8 @@ import uuid
 class PreQuizAnswer(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
+    user_email = models.EmailField(null=True, blank=True)
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
     quiz_title = models.CharField(max_length=255)
     
@@ -18,5 +19,8 @@ class PreQuizAnswer(models.Model):
 
     submitted_at = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        db_table = 'pre_quiz_answer'
+        
     def __str__(self):
         return f"{self.user.email} - {self.quiz_title} - {self.pre_quiz_question.question[:]}"

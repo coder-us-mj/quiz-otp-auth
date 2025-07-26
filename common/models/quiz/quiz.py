@@ -19,7 +19,8 @@ class Quiz(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField(null=True, blank=True)
     status = models.CharField(max_length=20, default='active')
-
+    class Meta:
+        db_table = 'quiz'
     def is_active(self):
         """
         Return True if the quiz has not been soft-deleted.

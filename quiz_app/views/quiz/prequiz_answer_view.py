@@ -10,6 +10,10 @@ from common.response_handler import ResponseHandler
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def submit_prequiz_answer(request):
+    """
+    Submit a pre-quiz answer for a given quiz.
+    Auto-fills quiz title and saves the answer for the authenticated user.
+    """
     try:
         quiz = get_object_or_404(Quiz, id=request.data.get('quiz'))
         request.data['quiz_title'] = quiz.title  # Auto-fill title from quiz object

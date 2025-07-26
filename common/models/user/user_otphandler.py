@@ -10,7 +10,7 @@ class EmailOTP(models.Model):
     """
     email=models.EmailField()
     otp = models.CharField(max_length=6)
-    created_at= models.DateTimeField(auto_now=True)
+    created_at= models.DateTimeField(auto_now   =True)
 
     def is_expired(self):
         """
@@ -32,3 +32,4 @@ class EmailOTP(models.Model):
     class Meta:
         # Explicitly specify the app
         app_label = 'common'
+        db_table = 'email_otp_handler'

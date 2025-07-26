@@ -17,6 +17,10 @@ from common.response_handler import ResponseHandler
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def upload_certificate_template(request):
+    """
+    Upload a new certificate template image associated with the authenticated user.
+    """
+    
     serializer = CertificateTemplateSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save(uploaded_by=request.user)
@@ -26,6 +30,10 @@ def upload_certificate_template(request):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def generate_certificate(request):
+    """
+    Generate a certificate by overlaying a pre-quiz answer as text on a template image
+    at specified (x, y) coordinates, then save and return the generated certificate.
+    """
     try:
         # Validate input
         required_fields = ['template_id', 'quiz_id', 'pre_quiz_question_id', 'pre_quiz_answer_id', 'x', 'y']

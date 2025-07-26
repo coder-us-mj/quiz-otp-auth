@@ -37,5 +37,6 @@ class SignUp(AbstractUser):
     class Meta:
         # Explicitly specify the app
         app_label = 'common'
+        db_table = 'user_signup'
 
 

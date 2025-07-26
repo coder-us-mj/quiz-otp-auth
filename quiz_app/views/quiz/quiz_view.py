@@ -97,3 +97,4 @@ def delete_quiz(request, quiz_id):
         return ResponseHandler.handle_400_error('Quiz not found')
     except Exception as e:
         return ResponseHandler.handle_500_error(request, e)
+

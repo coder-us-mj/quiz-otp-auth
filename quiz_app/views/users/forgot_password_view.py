@@ -9,6 +9,9 @@ User = get_user_model()
 
 @api_view(['POST'])
 def forgot_password(request):
+    """
+    Send a 6-digit OTP to the user's registered email for password reset.
+    """
     email = request.data.get('email')
     if not email:
         return ResponseHandler.handle_400_error("Email is required.")
@@ -38,6 +41,9 @@ def forgot_password(request):
     
 @api_view(['POST'])
 def reset_password(request):
+    """
+    Verify OTP and update the user's password if the OTP is valid.
+    """
     email = request.data.get('email')
     otp = request.data.get('otp')
     new_password = request.data.get('new_password')
